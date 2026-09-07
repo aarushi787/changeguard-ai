@@ -4,6 +4,8 @@ Supabase hosts PostgreSQL; FastAPI retains authentication, tenant authorization,
 
 ## Connect locally
 
+The backend automatically loads the repository-root `.env` for local use. Store `DATABASE_URL`, `APP_ORIGIN=http://127.0.0.1:8011`, `STORAGE_PATH=data/supabase-documents` and local worker settings there. Explicit environment variables take precedence, and tests do not load this file. The local private `.env` is excluded from Git. Run `./scripts/start-supabase.ps1` to use it, or `python -m scripts.verify_supabase` to verify connectivity. A local `.env` does not deploy the backend to Vercel; cloud services need their own server-side secret settings.
+
 1. Open your Supabase **project**, then **Connect**. Copy the PostgreSQL direct URL (IPv6), or session pooler URL on port 5432 for IPv4. Transaction pooling on 6543 is intentionally rejected by this configuration.
 2. From the project directory, set `$env:PYTHONPATH='.vendor;.'` if using bundled local dependencies. Run `python -m scripts.configure_supabase` in an interactive terminal. Paste the URL with the database password at the hidden prompt; URL-encode special password characters. It verifies connectivity without printing credentials and saves to Git-ignored `data/supabase-database-url.txt`. Restrict Windows file access to your account; chmod alone does not configure Windows ACLs. For hosted deployments use a secret manager instead.
 3. Run `./scripts/start-supabase.ps1`. This migrates the database and starts at http://127.0.0.1:8011, leaving the SQLite demo on 8010 intact. It does not silently copy or seed data.
