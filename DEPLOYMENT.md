@@ -55,6 +55,16 @@ Cloud, private-cloud and on-premise use the same application. No runtime outboun
 
 ## Vercel frontend routing
 
+### Persistent backend on Render
+
+`render.yaml` defines a single Docker service in Singapore with 1 GB of persistent storage. Review and approve Render billing before creating the service. Startup uses `python -m scripts.start_cloud`: migrations must succeed before the server listens on Render's PORT. The embedded database worker shares this service's disk; keep one instance. Render's disk prevents zero-downtime deployments, so brief deployment downtime is expected. This is a pilot sizing choice, not a capacity guarantee.
+
+Set DATABASE_URL through Render's secret environment settings. APP_ORIGIN is the Vercel frontend URL, ENVIRONMENT=production, RUN_WORKER=1, STORAGE_PATH=/app/data/documents and ALLOW_REGISTRATION=0. Existing demo accounts can sign in; company registration remains intentionally closed unless explicitly enabled. For this existing fictional Supabase demo, set RESTORE_BUNDLED_DEMO=1 once: it restores only bundled CSV files matching the saved source hash and never overwrites differing evidence. It does not migrate real customer documents. Remove this flag after the initial successful deployment.
+
+Before enabling the cloud worker against this database, stop the local Supabase worker: independent local and Render disks cannot serve each other's jobs. Transfer any non-demo documents through an authenticated administrative channel and verify hashes before switching traffic. Keep the old SQLite installation separate.
+
+Once Render assigns the actual HTTPS hostname, configure a Vercel rewrite from `/api/:path*` to `https://<verified-backend-host>/api/:path*`. Do not guess the hostname or publish a placeholder rewrite. Redeploy Vercel, then verify health, sign-in, source download and report completion through its public domain.
+
 Deploying the Vite `dist` directory publishes only the frontend. Supabase provides PostgreSQL; it does not host this FastAPI application. A frontend-only deployment returns 404 for `/api/v1/auth/me`, `/api/v1/auth/login` and `/api/v1/auth/register`.
 
 Run the provided Docker image as a persistent backend with its database secret, a private document volume, migrations and a worker. Route all `/api/:path*` requests from the frontend origin to that backend, preserving the complete `/api/` path. Configure APP_ORIGIN to the exact public frontend origin (for this deployment, `https://changeguard-ai.vercel.app`). Preserve Set-Cookie response headers. Do not direct API requests to the Supabase project URL, and never put the database secret in a VITE variable. A publicly hosted frontend cannot reach the developer machine's loopback address.

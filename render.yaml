@@ -1,0 +1,29 @@
+# Paid persistent service; review the Render cost before applying this Blueprint.
+services:
+  - type: web
+    name: changeguard-api
+    runtime: docker
+    repo: https://github.com/aarushi787/changeguard-ai
+    branch: main
+    region: singapore
+    plan: 0.5c-512mb
+    numInstances: 1
+    healthCheckPath: /api/v1/health
+    dockerCommand: python -m scripts.start_cloud
+    disk:
+      name: changeguard-documents
+      mountPath: /app/data/documents
+      sizeGB: 1
+    envVars:
+      - key: DATABASE_URL
+        sync: false
+      - key: ENVIRONMENT
+        value: production
+      - key: APP_ORIGIN
+        value: https://changeguard-ai.vercel.app
+      - key: ALLOW_REGISTRATION
+        value: "0"
+      - key: RUN_WORKER
+        value: "1"
+      - key: STORAGE_PATH
+        value: /app/data/documents
