@@ -6,6 +6,7 @@ from pathlib import Path
 from sqlalchemy import select
 from backend.db import Session
 from backend.universal_models import ControlledChange
+from backend.storage import document_storage, DatabaseStorage
 
 
 def restore(source, storage, fixtures):
@@ -21,14 +22,16 @@ def restore(source, storage, fixtures):
         if hashlib.sha256(target.read_bytes()).hexdigest() != expected:
             raise RuntimeError('Existing source differs; restore refused.')
         return False
-    with target.open('xb') as stream:
-        stream.write(content)
+    if isinstance(storage, DatabaseStorage):
+        target.write_bytes(content)
+    else:
+        with target.open('xb') as stream:
+            stream.write(content)
     return True
 
 
 def main():
-    storage = Path(os.environ['STORAGE_PATH'])
-    storage.mkdir(parents=True, exist_ok=True)
+    storage = document_storage()
     fixtures = {}
     for path in Path('samples/multidomain').glob('*.csv'):
         content = path.read_bytes()

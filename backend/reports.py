@@ -113,7 +113,7 @@ def balloon_export(revision,storage,format):
     import fitz
     located=[c for c in chars if c['source_location'].get('bbox')]
     if not located: raise ValueError('No source bounding boxes are available. Export the characteristic list instead.')
-    with fitz.open(storage/revision['storage_key']) as doc:
+    with fitz.open(stream=(storage/revision['storage_key']).read_bytes(), filetype='pdf') as doc:
         chars=place_balloons(chars,[{'page':i+1,'width':p.cropbox.width,'height':p.cropbox.height} for i,p in enumerate(doc)])
         for c in chars:
             box=c['source_location'].get('bbox')

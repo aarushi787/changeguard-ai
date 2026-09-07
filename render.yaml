@@ -1,4 +1,4 @@
-# Paid persistent service; review the Render cost before applying this Blueprint.
+# Free pilot service. Sleeps when idle; documents persist in the Supabase database.
 services:
   - type: web
     name: changeguard-api
@@ -6,14 +6,10 @@ services:
     repo: https://github.com/aarushi787/changeguard-ai
     branch: main
     region: singapore
-    plan: 0.5c-512mb
+    plan: free
     numInstances: 1
     healthCheckPath: /api/v1/health
     dockerCommand: python -m scripts.start_cloud
-    disk:
-      name: changeguard-documents
-      mountPath: /app/data/documents
-      sizeGB: 1
     envVars:
       - key: DATABASE_URL
         sync: false
@@ -27,3 +23,7 @@ services:
         value: "1"
       - key: STORAGE_PATH
         value: /app/data/documents
+      - key: STORAGE_BACKEND
+        value: database
+      - key: RESTORE_BUNDLED_DEMO
+        value: "1"

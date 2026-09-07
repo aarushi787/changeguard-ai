@@ -1,7 +1,7 @@
 import os
 import uuid
 from datetime import datetime, timezone
-from sqlalchemy import create_engine, String, JSON, DateTime, Text, event, Integer, UniqueConstraint
+from sqlalchemy import create_engine, String, JSON, DateTime, Text, event, Integer, UniqueConstraint, LargeBinary
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, sessionmaker
 
 def now():
@@ -18,6 +18,14 @@ Session = sessionmaker(engine, expire_on_commit=False)
 
 class Base(DeclarativeBase):
     pass
+
+class DocumentBlob(Base):
+    __tablename__ = 'document_blobs'
+    key: Mapped[str] = mapped_column(String(80), primary_key=True)
+    content: Mapped[bytes] = mapped_column(LargeBinary)
+    sha256: Mapped[str] = mapped_column(String(64))
+    size: Mapped[int] = mapped_column(Integer)
+    created: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=now)
 
 class Organization(Base):
     __tablename__ = 'organizations'

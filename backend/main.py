@@ -31,8 +31,8 @@ from backend.intelligence import DeterministicProvider, AdjacencyGraph, compare,
 
 logging.basicConfig(level=logging.INFO, format='%(message)s')
 log = logging.getLogger('changeguard')
-STORAGE = Path(os.getenv('STORAGE_PATH','data/documents')).resolve()
-STORAGE.mkdir(parents=True, exist_ok=True)
+from backend.storage import document_storage, StorageCapacityError
+STORAGE = document_storage()
 PRODUCTION = os.getenv('ENVIRONMENT') == 'production'
 STOP = threading.Event()
 
@@ -150,6 +150,10 @@ async def lifespan(app):
 
 app=FastAPI(title='ChangeGuard AI',version='0.1.0',lifespan=lifespan)
 app.add_middleware(BodyLimit)
+
+@app.exception_handler(StorageCapacityError)
+async def storage_capacity(request, exc):
+    return JSONResponse({'detail':str(exc)}, status_code=507)
 
 @app.exception_handler(StaleDataError)
 async def stale_write(request,exc):
@@ -389,8 +393,8 @@ def document_file(id:str,token:str,u:User=Depends(user),s:DBSession=Depends(db))
     r=get(s,u,id,'revision')
     valid=any(x.data['hash']==token_hash(token) and x.data['revision_id']==id and x.data['user_id']==u.id and x.data['expires']>now().isoformat() for x in records(s,u,'download_token'))
     if not valid: raise HTTPException(403,'Download link expired or invalid.')
-    source_bytes(r)
-    return FileResponse(STORAGE/r.data['storage_key'],filename=r.data['filename'])
+    from urllib.parse import quote
+    return Response(source_bytes(r), media_type='application/octet-stream', headers={'Content-Disposition': "attachment; filename*=UTF-8''" + quote(r.data['filename'], safe='')})
 
 @app.get('/api/v1/revisions/{id}/pages/{page}')
 def page_image(id:str,page:int,u:User=Depends(user),s:DBSession=Depends(db)):
@@ -402,7 +406,7 @@ def page_image(id:str,page:int,u:User=Depends(user),s:DBSession=Depends(db)):
             if page<1 or page>len(pdf): raise HTTPException(404,'Page not found.')
             p=pdf[page-1];p.set_rotation(0); pix=p.get_pixmap(matrix=fitz.Matrix(1.4,1.4),alpha=False)
             return Response(pix.tobytes('png'),media_type='image/png',headers={'X-Page-Width':str(p.rect.width),'X-Page-Height':str(p.rect.height)})
-    if r.data['suffix'] in {'.png','.jpg','.jpeg'} and page==1: return FileResponse(STORAGE/r.data['storage_key'])
+    if r.data['suffix'] in {'.png','.jpg','.jpeg'} and page==1: return Response(content, media_type='image/png' if r.data['suffix']=='.png' else 'image/jpeg')
     raise HTTPException(422,'Page rendering is available for PDF and images. Use the characteristic table for structured files.')
 
 class ComparisonInput(Input):
