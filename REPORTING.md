@@ -9,3 +9,7 @@ Uploaded source integrity is verified when the report is queued. Payload and dig
 The synchronous report API remains available for small integrations. Use queued reports for the interactive UI. The universal PDF currently emphasizes traceability over compact design; full graph imagery and drawing comparison pages remain specialized engineering-report capabilities.
 
 Fictional sample reports and page renders can be generated with `python -m scripts.verify_multidomain_reports`. They are written to `output/pdf/multidomain`. Existing engineering reports/balloon exports remain available in the drawing workbench.
+
+## Shared workspace integration — September 2026
+
+Reports navigation lists both drawing and structured changes. Open a drawing change and use Export report to queue PDF/XLSX/JSON evidence. The queued report includes the linked original proposal and integration audit events. Generic report generation is rejected for a linked drawing change to avoid exporting obsolete structured analysis as current evidence. Earlier immutable exports remain historical artifacts.

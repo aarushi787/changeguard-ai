@@ -40,3 +40,7 @@ Migration 0003 adds `controlled_changes` (tenant/domain/status/classification, v
 Source versions, deltas, reviews, actions, effectivity and approvals are validated aggregate fields described in CHANGE_MODEL.md. Named commercial grants, domain point overrides and universal report jobs use typed Record kinds `change_access`, `domain_settings` and `universal_report`. Universal audit events carry scope metadata and are excluded from the legacy audit listing; guarded universal history enforces record-specific access. Existing append-only triggers protect audit/snapshot history after migrations.
 
 Tenant isolation is enforced in application queries. Database RLS, normalized global asset catalogs and additional foreign keys remain future hardening; do not infer them from the presence of tenant IDs.
+
+## Shared workspace integration — September 2026
+
+The integration adds validated references inside existing versioned aggregates rather than new tables: controlled_changes.data.drawing_project_id → project; project.data.controlled_change_id → controlled change; change_set.data.controlled_change_id → controlled change. The workspace adapter deduplicates linked records. These references are enforced by application services, not physical foreign keys. Document blobs still use schema migration 0004.

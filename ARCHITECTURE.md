@@ -70,3 +70,7 @@ flowchart TD
 ```
 
 Universal input adapters currently accept CSV/XLSX/JSON. Drawing extraction stays in the specialized workbench. Shared graph/rule interfaces allow future adapters without model-provider dependence. Domain logic is separated from existing industry overlays. See MULTI_DOMAIN_REVIEW.md for before/after decisions and KNOWN_LIMITATIONS.md for unfinished integration boundaries.
+
+## Shared workspace integration — September 2026
+
+The active UI is now one `Universal` shell. `src/drawing-workspace.tsx` contains engineering evidence/review panels without a second sidebar or session. `backend/workspace.py` projects structured and drawing records into one register. Explicit drawing setup links the original controlled change to a project, then one comparison. Specialized extraction and approval algorithms remain intact. See INTEGRATION_REVIEW.md for the audit and boundary decisions.

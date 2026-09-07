@@ -451,10 +451,13 @@ def generated_actions(changes,u):
 
 @app.post('/api/v1/change-sets',status_code=201)
 def create_comparison(body:ComparisonInput,u:User=Depends(user),s:DBSession=Depends(db)):
-    require(u,'ENGINEER','MANAGER'); p=get(s,u,body.project_id,'project'); a=get(s,u,body.old_revision_id,'revision'); b=get(s,u,body.new_revision_id,'revision')
+    require(u,'ENGINEER','MANAGER'); p=get(s,u,body.project_id,'project',True); a=get(s,u,body.old_revision_id,'revision'); b=get(s,u,body.new_revision_id,'revision')
+    if p.data.get('controlled_change_id') and any(c.data['project_id']==p.id for c in records(s,u,'change_set')):
+        raise HTTPException(409,'This controlled change already has a drawing comparison. Re-analyze it or create a successor change.')
     if a.id==b.id or any(r.data['project_id']!=p.id or r.data['status']!='READY' for r in [a,b]): raise HTTPException(422,'Select two ready revisions from the same project.')
     changes,inventory,docs=analysis(s,u,a,b,p)
     r=add(s,u,'change_set',{**body.model_dump(),'number':f'EC-{len(records(s,u,"change_set"))+1:04d}','part':p.data['part'],'customer':p.data.get('customer',''),'old_revision':a.data['revision'],'new_revision':b.data['revision'],'changes':changes,'inventory':inventory,'documents':docs,'actions':generated_actions(changes,u),'approvals':[],'comments':[],'status':'AI_ANALYSIS_COMPLETE','stale':False,'demo':p.data.get('demo',False)})
+    if p.data.get('controlled_change_id'):edit(r,controlled_change_id=p.data['controlled_change_id'])
     audit(s,u,r.id,'COMPARISON_COMPLETE',{'changes':changes,'source_sha256':a.data['sha256'],'target_sha256':b.data['sha256']}); s.commit(); return out(r)
 
 @app.get('/api/v1/change-sets')
@@ -586,6 +589,9 @@ def transition(id:str,body:Transition,u:User=Depends(user),s:DBSession=Depends(d
             approvals.append({'stage':'QUALITY','user_id':u.id,'user':u.email,'at':now().isoformat(),'reason':body.reason,'evidence_digest':fingerprint}); state='APPROVED'
         else:
             if state!='APPROVED' or {a['stage'] for a in approvals}!={'ENGINEERING','QUALITY'}: raise HTTPException(409,'Both approvals are required before release.')
+            project=get(s,u,r.data['project_id'],'project')
+            if project.data.get('effectivity')=='DATE' and project.data.get('effective_date','')>now().date().isoformat():
+                raise HTTPException(409,'The approved effective date has not arrived.')
             state='RELEASED'
     updates={'status':state,'approvals':approvals}
     if state=='RELEASED':
@@ -743,6 +749,7 @@ def queue_report(id:str,body:ReportRequest,u:User=Depends(user),s:DBSession=Depe
     source_bytes(source);source_bytes(target)
     payload={**out(r),'source_sha256':source.data['sha256'],'target_sha256':target.data['sha256'],'unresolved':blockers(s,u,r)}
     entities=[id,r.data['project_id'],source.id,target.id]
+    if r.data.get('controlled_change_id'):entities.append(r.data['controlled_change_id'])
     events=[{'id':e.id,'entity':e.entity,'actor':e.actor,'operation':e.operation,'details':e.details,'created':e.created.replace(tzinfo=timezone.utc).isoformat()} for e in s.scalars(select(Audit).where(Audit.tenant==u.tenant,Audit.entity.in_(entities)).order_by(Audit.created))]
     j=add(s,u,'job',{'type':'REPORT','status':'QUEUED','change_set_id':id,'format':body.format,'report_kind':body.kind,'payload':payload,'source_revisions':[source.data,target.data],'events':events,'evidence_digest':digest(payload)})
     audit(s,u,id,'REPORT_QUEUED',{'job_id':j.id,'format':body.format,'evidence_digest':j.data['evidence_digest']});s.commit();return {'id':j.id,'status':'QUEUED'}
@@ -819,6 +826,8 @@ def matching(id:str,u:User=Depends(user),s:DBSession=Depends(db)):
 
 from backend.universal import router as universal_router
 app.include_router(universal_router)
+from backend.workspace import router as workspace_router
+app.include_router(workspace_router)
 
 if Path('dist').exists():
     app.mount('/',StaticFiles(directory='dist',html=True),name='frontend')

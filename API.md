@@ -132,3 +132,7 @@ All routes below use `/api/v1`, the same authenticated session cookie and `X-Cha
 | GET /changes/{id}/report | Synchronous small-integration export |
 
 404 intentionally hides cross-tenant and unauthorized commercial records. 409 indicates stale version, missing gates, source corruption or invalid state transition. 422 identifies invalid input. Named grants never bypass tenant scope or approval-role checks. Integration events are retained locally as NOT_DISPATCHED; no outbound connector endpoint is claimed.
+
+## Shared workspace integration — September 2026
+
+`GET /api/v1/workspace/changes?offset=0&limit=200` returns the shared register. `GET /api/v1/workspace/changes/{id}` returns the active workflow and evidence-routing references. `POST /api/v1/workspace/changes/{id}/drawing-workspace` takes `expected_version`, `part`, optional `customer`, and `reason`. Requires an internal engineering change and engineering/manager/admin authority. Conversion is idempotent; reviewed/approved evidence cannot switch authority. Existing drawing upload/comparison/review/report endpoints remain authoritative for DRAWING records. Generic write/report endpoints return 409 after linking. Old read endpoints remain for historical API compatibility; integrations should use the workspace projection for current status.

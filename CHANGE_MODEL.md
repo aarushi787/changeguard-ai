@@ -17,3 +17,7 @@ Approval requires both full sources verified, at least one confirmed real delta,
 Each pack specifies at least two independent stages. A different user signs each stage, including when administrators sign. Approvals bind to the evidence digest. Source/map/decision/action edits on unapproved changes clear approvals. Approved sources/actions cannot be edited. A manager explicitly records effectivity; a future date cannot be bypassed. Batch/order/WIP/revision conditions require a reference and human confirmation; no ERP state is queried or changed.
 
 Parent IDs are tenant/access validated. Automatic chains, bulk migrations, rollback execution and effectivity scheduling are not implemented. Revert records a human disposition; it does not undo production activity.
+
+## Shared workspace integration — September 2026
+
+Workspace records expose `workflow: STRUCTURED | DRAWING`. Linked drawing changes retain the original controlled-change ID in the register, with `drawing.project_id`, `drawing.change_set_id` and `drawing.controlled_change_id` references. Generic writes cannot become a parallel approval authority. Setup retains the old aggregate and an immutable snapshot; no source verification or approval is automatically transferred. Effectivity is copied into the project and included in the drawing approval fingerprint. No new migration is needed beyond existing schema 0004.

@@ -13,3 +13,7 @@ Limits: 1,000 nodes and 5,000 edges per controlled map; 1,000 spreadsheet relati
 Coverage is a count of expected **relationship types** present versus those in the selected pack. It is not an enterprise readiness percentage. Unknown inventory and commercial exposure are not converted to zero. Values in different currencies are never added together; associated order value is not loss.
 
 Run `python -m scripts.benchmark_graph` for an in-memory benchmark including 100,000 edges. This does not bypass per-change import limits or establish database production capacity. Lazy database traversal, organization-wide shared object catalogs and concurrent-user benchmarks remain future work.
+
+## Shared workspace integration — September 2026
+
+Both graph views now open from the same change register. Drawing changes retain typed characteristic/operation/machine/inspection/document dependencies; structured changes retain bounded domain graph paths. Maps are evidence snapshots, not an automatically synchronized organizational master graph. The shared register does not infer relationships between unrelated records.

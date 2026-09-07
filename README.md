@@ -6,7 +6,7 @@ Supabase PostgreSQL connection instructions: [SUPABASE.md](SUPABASE.md).
 
 **Know what a change will affect before you approve it.** Built for MCCIA AI Applied Studio.
 
-The default workspace now supports three working domains: **engineering, supplier/procurement and quality**. It includes controlled source versions, corrections, deterministic comparison, evidence-backed impact paths, review actions, independent approvals, effectivity and PDF/Excel/JSON reports. The established drawing workbench remains available at `/#engineering`.
+The default workspace now supports three working domains: **engineering, supplier/procurement and quality**. It includes controlled source versions, corrections, deterministic comparison, evidence-backed impact paths, review actions, independent approvals, effectivity and PDF/Excel/JSON reports. Drawing verification is integrated into the same workspace; `/#engineering` is a compatibility route to the shared Drawings catalog.
 
 Start with [DEMO_GUIDE.md](DEMO_GUIDE.md). The new fictional tenant is **PRAGATI INDUSTRIAL SYSTEMS**; sign in as `admin@pragati.changeguard.demo` with `ChangeGuard!2026`. Run `python -m alembic upgrade head` and `python -m scripts.seed_multidomain` before using it. Existing Northstar data and accounts are preserved.
 
@@ -98,3 +98,7 @@ This is a **working MVP for evaluation and controlled pilot development**, not a
 - [DEPLOYMENT.md](DEPLOYMENT.md): PostgreSQL, containers, TLS, backup and operations
 
 The original sample PDF and CSV files under `samples/` are CC0 fictional fixtures. Dependency licenses remain those of their respective projects.
+
+## Unified workspace
+
+Engineering drawings, supplier and quality changes now share one sidebar, change register, action queue and approval navigation. Start drawing work from New change → Engineering → Drawing revisions. See [integration audit, implementation and validation](INTEGRATION_REVIEW.md).

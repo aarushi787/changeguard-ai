@@ -9,3 +9,7 @@ Scores sum field-rule contributions plus mapped inventory/customer/supplier expo
 Tenant administrators can override known rule point values from 1–100 through Settings/API. Rules cannot be disabled with zero points. Saving overrides invalidates analysis and approvals on open universal changes; approved evidence remains frozen. The override values, reason and new analysis evidence are audited.
 
 Ignored and informational detections retain conservative recommendations and mandatory review actions. Reviewers document why an action is unnecessary before completing it; false-positive feedback never silently changes a rule. Organization ignore patterns, conditional logical expressions, universal CTQ semantics and custom approval policy editors are not yet implemented. The legacy drawing engine retains its richer CTQ/safety and GD&T-specific rules.
+
+## Shared workspace integration — September 2026
+
+Shared workspace integration preserves the tested rule engines. Drawing rows display the highest characteristic risk score; scores are not summed across characteristics. The structured pack score and specialized engineering score are review-priority measures with distinct rule provenance, not comparable probabilities. Domain point overrides do not rewrite sealed drawing evidence.

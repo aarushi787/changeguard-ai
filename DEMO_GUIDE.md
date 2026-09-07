@@ -45,3 +45,7 @@ Inspection interval changes from 100 to 20 with one sample per interval: a 5× i
 New change → domain/owner/reason/effectivity → Evidence → upload two files from `samples/multidomain` → compare → review. Import the matching dependency JSON or use the Excel relationship template; imports invalidate analysis, so compare again. Quick mode works without mappings but explicitly exposes unknown coverage and requires a coverage action before approval.
 
 Export a queued PDF/Excel/JSON report from Summary. History retains source corrections, review decisions, actions and approvals. No compliance/HR/production pack is presented as a working fourth domain.
+
+## Shared workspace integration — September 2026
+
+The live demo is https://changeguard-ai.vercel.app/. Use `admin@pragati.changeguard.demo` / `ChangeGuard!2026`; all data is fictional. The main register includes drawing, supplier and quality changes. For the integrated drawing scenario choose New change → Engineering → Drawing revisions, supply GS-204 and a rationale, upload samples/GS-204-Rev-C.pdf and GS-204-Rev-D.pdf, verify characteristics, compare, then inspect Diff, Impact, Actions, Approvals and History. Supplier 7→14 days and Quality 100→20 inspection interval remain available as separate domain examples. The Drawings page is a project/source catalog in the same application, not a separate application.

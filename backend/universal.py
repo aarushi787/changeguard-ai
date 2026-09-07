@@ -41,6 +41,8 @@ def get_change(s,u,id,write=False,version=None):
     if not r:raise HTTPException(404,'Change not found.')
     if write:
         require(u,*pack(r.domain)['edit_roles'],'MANAGEMENT')
+        if r.data.get('drawing_project_id'):
+            raise HTTPException(409,'This change uses drawing verification and release. Open it in the shared workspace; a second approval workflow is not allowed.')
         if version is not None and r.version!=version:raise HTTPException(409,'Evidence changed. Refresh before saving.')
     return r
 
@@ -471,6 +473,7 @@ def update_settings(body:RuleSettings,u:User=Depends(user),s:DBSession=Depends(d
 @router.get('/changes/{id}/report')
 def report(id:str,format:Literal['json','xlsx','pdf']='json',u:User=Depends(user),s:DBSession=Depends(db)):
     r=get_change(s,u,id);sources_intact(r)
+    if r.data.get('drawing_project_id'):raise HTTPException(409,'Export the current drawing evidence report from the shared workspace.')
     from backend.universal_reports import render
     events=[{'actor':e.actor,'operation':e.operation,'details':e.details,'at':e.created.replace(tzinfo=timezone.utc).isoformat()} for e in s.scalars(select(Audit).where(Audit.tenant==u.tenant,Audit.entity==id).order_by(Audit.created,Audit.id))]
     data=render(view(r),events,format)
@@ -483,6 +486,7 @@ class ReportRequest(Input):
 @router.post('/changes/{id}/report-jobs',status_code=202)
 def queue_report(id:str,body:ReportRequest,u:User=Depends(user),s:DBSession=Depends(db)):
     r=get_change(s,u,id);sources_intact(r)
+    if r.data.get('drawing_project_id'):raise HTTPException(409,'Export the current drawing evidence report from the shared workspace.')
     events=[{'actor':e.actor,'operation':e.operation,'details':e.details,'at':e.created.replace(tzinfo=timezone.utc).isoformat()} for e in s.scalars(select(Audit).where(Audit.tenant==u.tenant,Audit.entity==id).order_by(Audit.created,Audit.id))]
     payload=view(r)
     payload['owner_name']=check_owner(s,u,r.data['owner']).name

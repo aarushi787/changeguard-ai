@@ -23,3 +23,7 @@ Columns: source_id, source_label, source_type, target_id, target_label, target_t
 Nodes require type and ISO date. Edges require a supported relationship and evidence. Connect the changed row ID to the relevant material, process, product, order or document. Node quantity/order value attributes can be added in JSON; order values require a COMMERCIAL change and a three-letter currency.
 
 Dedicated organization-wide Parts/BOM/Employees/Costs master-data imports, fuzzy identity resolution, supplier/part master validation and date/cost semantics for arbitrary columns are not implemented. The generic relationship import supports manual onboarding without pretending to be an ERP master-data connector. People-sensitive structured fields are rejected; field-name checks are not a general DLP guarantee.
+
+## Shared workspace integration — September 2026
+
+For a drawing change use New change → Engineering → Drawing revisions, enter a controlled part number, and upload both revisions inside that record. Supported drawing inputs remain PDF, PNG/JPG, DOCX and canonical characteristic CSV/XLSX; generic policy/PPTX/CAD parsing is not implied. Extraction is queued; verify source characteristics and completeness, then compare. Existing structured engineering changes can explicitly select drawing revisions from Evidence; original structured evidence remains in history and is not automatically converted into verified drawing characteristics.

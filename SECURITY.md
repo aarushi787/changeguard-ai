@@ -60,3 +60,7 @@ Universal audit events never appear in the engineering tenant-wide audit feed. P
 Required evidence versions protect edits; independent approvals use evidence fingerprints; administrator stage bypass still cannot reuse the same human. Approved evidence is immutable through application routes. Named grants and feedback do not rewrite the signed technical evidence.
 
 All processing works locally without external AI. Current private storage is filesystem based, and encryption in transit is supplied by the documented TLS gateway. Encryption at rest, KMS, malware scanning, RLS, SSO/MFA, restore drills and formal security assessment remain deployment responsibilities. The evaluated local server is bound only to 127.0.0.1.
+
+## Shared workspace integration — September 2026
+
+Unified workspace endpoints reuse authenticated tenant-scoped reads and the commercial access predicate. Drawing setup accepts only internal engineering changes, enforces engineering/manager/admin rights and expected versions, and rejects approved/terminal/completed-action conversions. Repeated setup is idempotent. A project lock plus the tenant mutation lock prevent duplicate linked comparisons on PostgreSQL. Alternate generic writes and report generation are blocked once drawing authority is selected. Prior source evidence and integration events remain auditable. Tests cover tenant, role, classification, stale-state, duplicate and release boundaries.

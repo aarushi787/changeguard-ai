@@ -5,3 +5,7 @@ Industries and operational domains are separate concepts. Engineering, supplier 
 The universal MVP uses domain packs for rules and approval routes. It does not yet compose arbitrary organization-specific industry overlays into universal rules. Future overlays may choose domain bundles, terminology, document types, standards and thresholds. They must not change the requirement for independent human approval or imply compliance certification.
 
 No automotive-specific entity is required by the universal core. A `document` node can represent a Control Plan, quality instruction, process plan or another controlled record. Domain-specific labels belong in configuration and source data.
+
+## Shared workspace integration — September 2026
+
+Industry overlays remain configuration above specialized engineering rules. The shared workspace does not duplicate applications per industry. This integration adds no new industry capability claims or automated compliance interpretation.

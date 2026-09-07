@@ -65,3 +65,7 @@ Run `python -m pytest -q` with the project dependencies available. `tests/test_u
 Final full integration run: 85 passed in 98.99 seconds. After adding the named-reviewer action regression and its permission fix, the final domain run passed 23 tests in 17.33 seconds. There are now 86 covered tests (63 preserved engineering + 23 universal). Report-queue privacy, Excel preview/commit and 80% tolerance-band arithmetic are included. No PostgreSQL/Docker execution was performed on this host.
 
 `python -m scripts.benchmark_graph` records bounded graph performance to `output/graph-benchmark.json`. It does not measure a database or concurrent clients. `python -m scripts.verify_multidomain_reports` generates three fictional reports in each export format and checks every PDF page for content/footer, rendering selected pages for visual review. No industrial accuracy claim follows from these synthetic checks.
+
+## Shared workspace integration — September 2026
+
+Integration coverage is in `tests/test_workspace.py`: one shared register, idempotent setup, original evidence preservation, tenant/RBAC/commercial filtering, stale versions, duplicate comparison prevention, alternate approval prevention, real independent release, future effectivity blocking, report provenance, and real-PDF worker JSON isolation. Run `python -m pytest -q` and `npm run build`. Browser testing used an isolated SQLite demo on port 8012, including real synthetic PDF uploads and comparison. Test results and performance limits are recorded in INTEGRATION_REVIEW.md.

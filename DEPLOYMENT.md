@@ -78,3 +78,7 @@ For a **separate demonstration deployment**, run `python -m scripts.seed_multido
 Universal structured parsing is bounded and performed off the async event loop. Universal reports use durable database jobs; RUN_WORKER=0 on the API and the separate worker service are recommended for deployment. The local evaluation server embeds a worker. Queues do not yet provide fair scheduling, cancellation, resource hard timeouts or abandoned-job recovery for universal reports.
 
 Cloud/private cloud/on-premise all use the same AI-off core. No external provider is needed. Infrastructure credentials, backup encryption, storage access, independent security assessment and restore drills must be supplied before a real confidential-data pilot. PostgreSQL and Docker execution were not available on this Windows host; configuration and SQLite tests are not a substitute for staging verification.
+
+## Shared workspace integration — September 2026
+
+The production topology is Vercel frontend → the checked-in `/api/:path*` rewrite → `https://changeguard-api.onrender.com` → private Supabase PostgreSQL schema. Deploy backend and frontend from the same commit. The integration uses the existing aggregate schema and requires migration 0004 for database document storage. No public secret or new paid service is needed. After deployment verify `/api/v1/workspace/changes`, sign-in, and a drawing change; `#engineering` now resolves inside the shared shell. Local UI validation can use a separate SQLite database and port 8012; never point a filesystem worker at the cloud queue.

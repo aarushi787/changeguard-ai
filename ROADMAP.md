@@ -19,3 +19,7 @@ Completed revision 3: common controlled-change aggregate; three domain packs; st
 10. Transactional outbox dispatch with retries/idempotency for authorized ERP/QMS/PromiseFlow integrations.
 
 Production, maintenance and compliance packs follow validated core workflows. HR and regulated domains require their own privacy/safety review and domain evidence before activation. No planned pack should appear available until its input model, rules, approvals, reports and evaluations are implemented.
+
+## Shared workspace integration — September 2026
+
+The two-shell integration gap is resolved for the three-pack MVP. Remaining priorities are PostgreSQL concurrency CI, SQL-native shared register pagination, organization master data, secure object storage/resource isolation, SSO/MFA, independently reviewed extraction evaluation, document adapters, successor/evolution flows, expert-validated additional packs, and explicit approved integration-event delivery. See the ranked list in INTEGRATION_REVIEW.md.

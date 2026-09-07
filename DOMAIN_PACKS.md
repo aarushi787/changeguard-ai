@@ -15,3 +15,7 @@ ADMIN can act in a stage but cannot sign multiple stages on the same change. Rea
 New domain logic using scalar fields and supported condition operators can be installed as a pack without editing the rule engine. An adapter, novel field semantics, a new action type or specialized regulated workflow requires implementation, security review and evaluation. The three supplied onboarding templates are explicitly curated; a new pack must supply its own tested onboarding conventions.
 
 Planned: supply chain, production, maintenance, compliance, HR, finance, product, IT, pharma, food, electronics, textile, packaging and chemical. No clinical, legal or employment decisions are implemented.
+
+## Shared workspace integration — September 2026
+
+Engineering supports both structured records and a drawing evidence workflow inside the shared workspace. New change → Engineering → Drawing revisions creates the linked project. Its specialized Engineering → independent Quality → Manager release route is preserved. Supplier and Quality retain their configured structured workflows. Additional packs are still planned.

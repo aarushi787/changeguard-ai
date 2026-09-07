@@ -1,0 +1,26 @@
+/* One shell around both structured and drawing evidence. */
+.u-main{padding:0!important;margin:0;min-width:0}
+.u-sidebar nav{margin-top:0;gap:4px;overflow-y:auto;flex-shrink:1}
+.u-sidebar nav button{font-size:12px;justify-content:flex-start;min-height:38px;flex-shrink:0}
+.u-sidebar{height:100dvh}
+.u-sidebar-bottom{flex-shrink:0}
+.workspace-skip{position:fixed;top:-80px;left:240px;z-index:1100;padding:12px;background:white;color:#174d3e}
+.workspace-skip:focus{top:12px}
+.drawing-module{min-width:0;color:var(--u-ink)}
+.drawing-module .page-heading h1{font-size:28px;color:var(--u-ink)}
+.drawing-module .page-heading p,.drawing-module .subtle{color:var(--u-muted)}
+.drawing-module .panel{background:#fff;border-color:#dce4dd}
+.u-shell .drawing-module .button.primary{background:#174d3e;color:white;border-color:#174d3e}
+.drawing-module .tabs{gap:4px}
+.u-shell .drawing-module .tabs button{border:0;border-radius:0;padding:12px;color:#64776c;white-space:nowrap;background:transparent}
+.u-shell .drawing-module .tabs button.active{color:#174d3e;border-bottom:2px solid #174d3e}
+.drawing-module .project-grid{grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));margin-bottom:20px}
+.drawing-module .project-buttons{flex-wrap:wrap}
+.drawing-module .modal-backdrop{z-index:1000}
+.drawing-module .toast{z-index:1100}
+.drawing-entry{border-top:1px solid #dce4dd;margin-top:20px;padding-top:18px}
+.drawing-module .workbench{margin-bottom:20px}
+.u-badge.released{background:#e3f0e7;color:#246047}
+.u-badge.quality_review,.u-badge.engineering_review{background:#e8eef7;color:#48668b}
+.u-shell .drawing-module .icon-button{padding:6px}
+@media(max-width:700px){.u-sidebar{height:auto}.u-sidebar nav{flex-direction:row}.u-sidebar nav button{justify-content:flex-start}.workspace-skip{left:12px}.drawing-module .page-heading h1{font-size:24px}}

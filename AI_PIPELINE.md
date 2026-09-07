@@ -18,3 +18,7 @@ Drawing processing remains staged PDF vector/text extraction → optional local 
 No external model provider is configured or called. AI-off is the implemented mode, not a toggle that quietly falls back to a commercial service. Local Tesseract is optional and is not installed on this Windows host. Private cloud/on-premise deployments can use the same deterministic core. Future providers must explicitly document data handling and retain provenance.
 
 Generic TextDiff, DocumentDiff, ImageDiff and semantic/VLM adapters for the new universal workflow are **not implemented**. PDF/images/DOCX currently belong to the engineering workbench. No PPTX, native CAD, live ERP, PLM or PromiseFlow ingestion is claimed. Existing knowledge retrieval is lexical and provenance-preserving in the engineering module; there is no unrestricted generative chatbot.
+
+## Shared workspace integration — September 2026
+
+Drawing PDFs, images and DOCX enter the same workspace through the Drawing revisions source option. The existing bounded extraction subprocess retains source provenance and human verification. Its stdout is reserved for JSON; third-party diagnostics are captured separately so a PDF library warning cannot break a valid extraction. No external AI is required or enabled.
