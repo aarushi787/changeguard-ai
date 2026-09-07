@@ -1,0 +1,15 @@
+{
+  "version": "CG-2.0",
+  "rules": [
+    {"id":"CG-TOL-004","when":"tightened","points":50,"why":"Tolerance interval tightened. Existing process and inspection capability must be verified.","reviews":["process capability","machine capability","tooling","inspection method","Control Plan","PFMEA"]},
+    {"id":"CG-MAT-001","when":"material","points":40,"why":"Material changed; existing supply and processing assumptions require review.","reviews":["supplier","machining","heat treatment","cost","inspection"]},
+    {"id":"CG-GDT-001","when":"gdt","points":40,"why":"GD&T notation changed. A qualified engineer must verify the frame and datum scheme.","reviews":["fixture","datum scheme","CMM program","inspection plan"]},
+    {"id":"CG-UNK-001","when":"uncertain","points":40,"why":"Removed or unresolved semantic evidence requires engineering disposition.","reviews":["engineering scope"]},
+    {"id":"CG-REV-001","when":"other","points":15,"why":"A controlled characteristic changed; review linked dependencies.","reviews":["engineering scope"]},
+    {"id":"CG-CTQ-001","when":"critical","points":20,"why":"Marked critical by the source or reviewer; quality approval is mandatory.","reviews":["critical characteristic controls"]},
+    {"id":"CG-SAFE-001","when":"safety","points":40,"why":"Safety relevance requires explicit engineering verification.","reviews":["safety requirements"]},
+    {"id":"CG-WIP-001","when":"inventory","points":10,"why":"Previous-revision inventory or WIP is recorded. Human disposition is required.","reviews":["stock disposition"]},
+    {"id":"CG-SUP-001","when":"supplier","points":10,"why":"A supplier is linked to this characteristic.","reviews":["supplier requirements"]},
+    {"id":"CG-CONF-001","when":"low_confidence","points":15,"why":"Low extraction confidence; verify source evidence before relying on this assessment.","reviews":["extraction evidence"]}
+  ]
+}

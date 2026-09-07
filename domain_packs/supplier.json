@@ -1,0 +1,13 @@
+{
+  "id":"supplier", "name":"Supplier & procurement", "version":"1.0", "status":"AVAILABLE",
+  "description":"Lead time, supplier specification and commercial changes with mapped order exposure.",
+  "edit_roles":["PURCHASE","QUALITY","PLANNER","PPC","MANAGER"],
+  "approvals":[["PURCHASE"],["QUALITY"],["PLANNER","PPC"]],
+  "required_relationship_types":["material","product","order","customer"],
+  "fields":["lead_time_days","unit_price","currency","material"],
+  "rules":[
+    {"id":"SUP-LEAD-001","field":"lead_time_days","operator":"increase","points":35,"review":["Open purchase orders", "Production schedule", "Customer commitments", "Inventory coverage", "Alternative supply"]},
+    {"id":"SUP-PRICE-001","field":"unit_price","operator":"changed","points":25,"review":["Commercial approval", "Provided cost basis"]},
+    {"id":"SUP-SPEC-001","field":"material","operator":"changed","points":40,"review":["Supplier qualification", "Quality specification", "Affected products"]}
+  ]
+}

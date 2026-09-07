@@ -1,0 +1,3 @@
+part,revision,quantity,status,location,batch,production_order
+GS-204,C,147,WIP,Machining cell 04,B-260901,PO-2048
+GS-204,C,82,FINISHED,Finished goods A3,B-260829,PO-2048

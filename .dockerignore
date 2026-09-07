@@ -1,0 +1,11 @@
+node_modules
+.vendor
+.venv
+.git
+data
+output
+tmp
+dist
+__pycache__
+.env
+test-results

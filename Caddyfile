@@ -1,0 +1,11 @@
+{$SITE_ADDRESS:localhost} {
+    request_body {
+        max_size 21MB
+    }
+    reverse_proxy api:8000
+    header {
+        X-Content-Type-Options nosniff
+        Referrer-Policy same-origin
+        -Server
+    }
+}

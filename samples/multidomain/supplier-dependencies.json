@@ -1,0 +1,258 @@
+{
+  "nodes": [
+    {
+      "id": "SUP-17",
+      "label": "Sahyadri Steel \u00b7 supplier",
+      "type": "supplier",
+      "updated_at": "2026-09-07",
+      "attributes": {}
+    },
+    {
+      "id": "MAT-1",
+      "label": "Material 1",
+      "type": "material",
+      "updated_at": "2026-09-07",
+      "attributes": {}
+    },
+    {
+      "id": "MAT-2",
+      "label": "Material 2",
+      "type": "material",
+      "updated_at": "2026-09-07",
+      "attributes": {}
+    },
+    {
+      "id": "MAT-3",
+      "label": "Material 3",
+      "type": "material",
+      "updated_at": "2026-09-07",
+      "attributes": {}
+    },
+    {
+      "id": "MAT-4",
+      "label": "Material 4",
+      "type": "material",
+      "updated_at": "2026-09-07",
+      "attributes": {}
+    },
+    {
+      "id": "PRD-1",
+      "label": "Assembly 1",
+      "type": "product",
+      "updated_at": "2026-09-07",
+      "attributes": {}
+    },
+    {
+      "id": "PRD-2",
+      "label": "Assembly 2",
+      "type": "product",
+      "updated_at": "2026-09-07",
+      "attributes": {}
+    },
+    {
+      "id": "PRD-3",
+      "label": "Assembly 3",
+      "type": "product",
+      "updated_at": "2026-09-07",
+      "attributes": {}
+    },
+    {
+      "id": "PO-1",
+      "label": "Open order 1",
+      "type": "order",
+      "updated_at": "2026-09-07",
+      "attributes": {}
+    },
+    {
+      "id": "PO-2",
+      "label": "Open order 2",
+      "type": "order",
+      "updated_at": "2026-09-07",
+      "attributes": {}
+    },
+    {
+      "id": "PO-3",
+      "label": "Open order 3",
+      "type": "order",
+      "updated_at": "2026-09-07",
+      "attributes": {}
+    },
+    {
+      "id": "PO-4",
+      "label": "Open order 4",
+      "type": "order",
+      "updated_at": "2026-09-07",
+      "attributes": {}
+    },
+    {
+      "id": "PO-5",
+      "label": "Open order 5",
+      "type": "order",
+      "updated_at": "2026-09-07",
+      "attributes": {}
+    },
+    {
+      "id": "CUS-1",
+      "label": "Aster Machinery",
+      "type": "customer",
+      "updated_at": "2026-09-07",
+      "attributes": {}
+    },
+    {
+      "id": "CUS-2",
+      "label": "Deccan Drives",
+      "type": "customer",
+      "updated_at": "2026-09-07",
+      "attributes": {}
+    },
+    {
+      "id": "CP-204",
+      "label": "CP-204 \u00b7 incoming inspection",
+      "type": "document",
+      "updated_at": "2026-09-07",
+      "attributes": {}
+    },
+    {
+      "id": "OP-10",
+      "label": "OP10 \u00b7 material preparation",
+      "type": "operation",
+      "updated_at": "2026-09-07",
+      "attributes": {}
+    },
+    {
+      "id": "OP-30",
+      "label": "OP30 \u00b7 turning",
+      "type": "operation",
+      "updated_at": "2026-09-07",
+      "attributes": {}
+    }
+  ],
+  "edges": [
+    {
+      "source": "SUP-17",
+      "target": "MAT-1",
+      "relation": "AFFECTS",
+      "evidence": "Fictional demonstration mapping, not a validated production relationship."
+    },
+    {
+      "source": "SUP-17",
+      "target": "MAT-2",
+      "relation": "AFFECTS",
+      "evidence": "Fictional demonstration mapping, not a validated production relationship."
+    },
+    {
+      "source": "SUP-17",
+      "target": "MAT-3",
+      "relation": "AFFECTS",
+      "evidence": "Fictional demonstration mapping, not a validated production relationship."
+    },
+    {
+      "source": "SUP-17",
+      "target": "MAT-4",
+      "relation": "AFFECTS",
+      "evidence": "Fictional demonstration mapping, not a validated production relationship."
+    },
+    {
+      "source": "MAT-1",
+      "target": "PRD-1",
+      "relation": "AFFECTS",
+      "evidence": "Fictional demonstration mapping, not a validated production relationship."
+    },
+    {
+      "source": "MAT-2",
+      "target": "PRD-2",
+      "relation": "AFFECTS",
+      "evidence": "Fictional demonstration mapping, not a validated production relationship."
+    },
+    {
+      "source": "MAT-3",
+      "target": "PRD-3",
+      "relation": "AFFECTS",
+      "evidence": "Fictional demonstration mapping, not a validated production relationship."
+    },
+    {
+      "source": "MAT-4",
+      "target": "PRD-1",
+      "relation": "AFFECTS",
+      "evidence": "Fictional demonstration mapping, not a validated production relationship."
+    },
+    {
+      "source": "PRD-1",
+      "target": "PO-1",
+      "relation": "AFFECTS",
+      "evidence": "Fictional demonstration mapping, not a validated production relationship."
+    },
+    {
+      "source": "PRD-2",
+      "target": "PO-2",
+      "relation": "AFFECTS",
+      "evidence": "Fictional demonstration mapping, not a validated production relationship."
+    },
+    {
+      "source": "PRD-3",
+      "target": "PO-3",
+      "relation": "AFFECTS",
+      "evidence": "Fictional demonstration mapping, not a validated production relationship."
+    },
+    {
+      "source": "PRD-1",
+      "target": "PO-4",
+      "relation": "AFFECTS",
+      "evidence": "Fictional demonstration mapping, not a validated production relationship."
+    },
+    {
+      "source": "PRD-2",
+      "target": "PO-5",
+      "relation": "AFFECTS",
+      "evidence": "Fictional demonstration mapping, not a validated production relationship."
+    },
+    {
+      "source": "PO-1",
+      "target": "CUS-1",
+      "relation": "AFFECTS",
+      "evidence": "Fictional demonstration mapping, not a validated production relationship."
+    },
+    {
+      "source": "PO-2",
+      "target": "CUS-2",
+      "relation": "AFFECTS",
+      "evidence": "Fictional demonstration mapping, not a validated production relationship."
+    },
+    {
+      "source": "PO-3",
+      "target": "CUS-1",
+      "relation": "AFFECTS",
+      "evidence": "Fictional demonstration mapping, not a validated production relationship."
+    },
+    {
+      "source": "PO-4",
+      "target": "CUS-2",
+      "relation": "AFFECTS",
+      "evidence": "Fictional demonstration mapping, not a validated production relationship."
+    },
+    {
+      "source": "PO-5",
+      "target": "CUS-1",
+      "relation": "AFFECTS",
+      "evidence": "Fictional demonstration mapping, not a validated production relationship."
+    },
+    {
+      "source": "MAT-1",
+      "target": "CP-204",
+      "relation": "AFFECTS",
+      "evidence": "Fictional demonstration mapping, not a validated production relationship."
+    },
+    {
+      "source": "MAT-2",
+      "target": "OP-10",
+      "relation": "AFFECTS",
+      "evidence": "Fictional demonstration mapping, not a validated production relationship."
+    },
+    {
+      "source": "MAT-3",
+      "target": "OP-30",
+      "relation": "AFFECTS",
+      "evidence": "Fictional demonstration mapping, not a validated production relationship."
+    }
+  ]
+}

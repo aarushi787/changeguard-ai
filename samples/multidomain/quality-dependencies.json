@@ -1,0 +1,65 @@
+{
+  "nodes": [
+    {
+      "id": "CP-204",
+      "label": "CP-204 \u00b7 inspection interval",
+      "type": "document",
+      "updated_at": "2026-09-07",
+      "attributes": {}
+    },
+    {
+      "id": "IP204",
+      "label": "Incoming inspection",
+      "type": "inspection",
+      "updated_at": "2026-09-07",
+      "attributes": {}
+    },
+    {
+      "id": "OP10",
+      "label": "OP10 \u00b7 inspection operation",
+      "type": "operation",
+      "updated_at": "2026-09-07",
+      "attributes": {}
+    },
+    {
+      "id": "GAUGE",
+      "label": "Measuring equipment",
+      "type": "machine",
+      "updated_at": "2026-09-07",
+      "attributes": {}
+    },
+    {
+      "id": "WI204",
+      "label": "WI-204 \u00b7 operator instruction",
+      "type": "document",
+      "updated_at": "2026-09-07",
+      "attributes": {}
+    }
+  ],
+  "edges": [
+    {
+      "source": "CP-204",
+      "target": "IP204",
+      "relation": "AFFECTS",
+      "evidence": "Fictional demonstration mapping, not a validated production relationship."
+    },
+    {
+      "source": "IP204",
+      "target": "OP10",
+      "relation": "AFFECTS",
+      "evidence": "Fictional demonstration mapping, not a validated production relationship."
+    },
+    {
+      "source": "IP204",
+      "target": "GAUGE",
+      "relation": "AFFECTS",
+      "evidence": "Fictional demonstration mapping, not a validated production relationship."
+    },
+    {
+      "source": "OP10",
+      "target": "WI204",
+      "relation": "AFFECTS",
+      "evidence": "Fictional demonstration mapping, not a validated production relationship."
+    }
+  ]
+}

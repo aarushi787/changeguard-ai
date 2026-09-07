@@ -1,0 +1,13 @@
+{
+  "id":"quality", "name":"Quality", "version":"1.0", "status":"AVAILABLE",
+  "description":"Inspection frequency and controlled quality-document changes.",
+  "edit_roles":["QUALITY","SUPPLIER_QUALITY","ENGINEER","ENGINEERING","MANAGER"],
+  "approvals":[["QUALITY"],["ENGINEER","ENGINEERING"]],
+  "required_relationship_types":["inspection","operation","document"],
+  "fields":["inspection_every_units","inspection_sample_count","method","acceptance_limit"],
+  "rules":[
+    {"id":"QUA-FREQ-001","field":"inspection_every_units","operator":"decrease","points":30,"review":["Inspection workload", "Measuring equipment", "Operator instructions", "Cycle time and resources", "Control Plan"]},
+    {"id":"QUA-FREQ-002","field":"inspection_every_units","operator":"increase","points":40,"review":["Detection coverage", "Quality approval", "Customer inspection requirements"]},
+    {"id":"QUA-METHOD-001","field":"method","operator":"changed","points":35,"review":["Inspection validation", "Equipment suitability", "Work instruction"]}
+  ]
+}

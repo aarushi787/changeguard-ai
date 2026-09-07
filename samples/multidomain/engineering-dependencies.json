@@ -1,0 +1,138 @@
+{
+  "nodes": [
+    {
+      "id": "C27",
+      "label": "Bearing diameter \u00b7 GS-204",
+      "type": "characteristic",
+      "updated_at": "2026-09-07",
+      "attributes": {}
+    },
+    {
+      "id": "FEATURE",
+      "label": "Bearing seat",
+      "type": "feature",
+      "updated_at": "2026-09-07",
+      "attributes": {}
+    },
+    {
+      "id": "OP30",
+      "label": "OP30 \u00b7 CNC turning",
+      "type": "operation",
+      "updated_at": "2026-09-07",
+      "attributes": {}
+    },
+    {
+      "id": "CNC04",
+      "label": "CNC-04 \u00b7 capability unknown",
+      "type": "machine",
+      "updated_at": "2026-09-07",
+      "attributes": {}
+    },
+    {
+      "id": "T08",
+      "label": "Tool T08",
+      "type": "tool",
+      "updated_at": "2026-09-07",
+      "attributes": {}
+    },
+    {
+      "id": "CMM",
+      "label": "CMM inspection",
+      "type": "inspection",
+      "updated_at": "2026-09-07",
+      "attributes": {}
+    },
+    {
+      "id": "CP021",
+      "label": "Control Plan CP-021",
+      "type": "document",
+      "updated_at": "2026-09-07",
+      "attributes": {}
+    },
+    {
+      "id": "PF021",
+      "label": "PFMEA PF-021",
+      "type": "document",
+      "updated_at": "2026-09-07",
+      "attributes": {}
+    },
+    {
+      "id": "WIP",
+      "label": "147 WIP units \u00b7 Rev C",
+      "type": "inventory",
+      "updated_at": "2026-09-07",
+      "attributes": {
+        "quantity": 147,
+        "unit": "pieces",
+        "status": "WIP"
+      }
+    },
+    {
+      "id": "FG",
+      "label": "82 finished units \u00b7 Rev C",
+      "type": "inventory",
+      "updated_at": "2026-09-07",
+      "attributes": {
+        "quantity": 82,
+        "unit": "pieces",
+        "status": "FINISHED"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "C27",
+      "target": "FEATURE",
+      "relation": "AFFECTS",
+      "evidence": "Fictional demonstration mapping, not a validated production relationship."
+    },
+    {
+      "source": "FEATURE",
+      "target": "OP30",
+      "relation": "AFFECTS",
+      "evidence": "Fictional demonstration mapping, not a validated production relationship."
+    },
+    {
+      "source": "OP30",
+      "target": "CNC04",
+      "relation": "AFFECTS",
+      "evidence": "Fictional demonstration mapping, not a validated production relationship."
+    },
+    {
+      "source": "OP30",
+      "target": "T08",
+      "relation": "AFFECTS",
+      "evidence": "Fictional demonstration mapping, not a validated production relationship."
+    },
+    {
+      "source": "C27",
+      "target": "CMM",
+      "relation": "AFFECTS",
+      "evidence": "Fictional demonstration mapping, not a validated production relationship."
+    },
+    {
+      "source": "CMM",
+      "target": "CP021",
+      "relation": "AFFECTS",
+      "evidence": "Fictional demonstration mapping, not a validated production relationship."
+    },
+    {
+      "source": "CMM",
+      "target": "PF021",
+      "relation": "AFFECTS",
+      "evidence": "Fictional demonstration mapping, not a validated production relationship."
+    },
+    {
+      "source": "OP30",
+      "target": "WIP",
+      "relation": "AFFECTS",
+      "evidence": "Fictional demonstration mapping, not a validated production relationship."
+    },
+    {
+      "source": "OP30",
+      "target": "FG",
+      "relation": "AFFECTS",
+      "evidence": "Fictional demonstration mapping, not a validated production relationship."
+    }
+  ]
+}

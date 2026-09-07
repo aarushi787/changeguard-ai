@@ -1,0 +1,13 @@
+{
+  "id": "engineering", "name": "Engineering", "version": "1.0", "status": "AVAILABLE",
+  "description": "Drawing and structured specification changes with process and inspection review.",
+  "edit_roles": ["ENGINEER", "ENGINEERING", "QUALITY", "MANAGER"],
+  "approvals": [["ENGINEER", "ENGINEERING"], ["QUALITY"]],
+  "required_relationship_types": ["operation", "inspection", "document"],
+  "fields": ["nominal", "upper_tolerance", "lower_tolerance", "material", "unit"],
+  "rules": [
+    {"id":"ENG-TOL-001","field":"upper_tolerance","operator":"decrease","points":30,"review":["Process capability", "Machine capability", "Inspection method", "Control Plan", "PFMEA"]},
+    {"id":"ENG-TOL-002","field":"lower_tolerance","operator":"increase","points":30,"review":["Process capability", "Inspection method"]},
+    {"id":"ENG-MAT-001","field":"material","operator":"changed","points":40,"review":["Supplier specification", "Machining and heat treatment", "Inspection"]}
+  ]
+}

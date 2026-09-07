@@ -1,0 +1,42 @@
+from pathlib import Path
+from reportlab.pdfgen import canvas
+from reportlab.lib.colors import HexColor
+
+Path('samples').mkdir(exist_ok=True)
+for rev,tol in [('C','0.10'),('D','0.02')]:
+    c=canvas.Canvas(f'samples/GS-204-Rev-{rev}.pdf',pagesize=(842,595))
+    c.setTitle(f'GS-204 Revision {rev} - Fictional engineering fixture')
+    c.setStrokeColor(HexColor('#344c45')); c.setFillColor(HexColor('#213c33'))
+    c.rect(25,25,792,545); c.setFont('Helvetica-Bold',14); c.drawString(45,540,'NORTHSTAR PRECISION WORKS')
+    c.setFont('Helvetica',9); c.drawRightString(790,540,'DEMONSTRATION DATA - NOT FOR MANUFACTURE')
+    c.line(25,520,817,520)
+    # Schematic geometry deliberately authored as a test fixture, not an actual production drawing.
+    c.setLineWidth(1.4)
+    points=[(125,245),(125,325),(190,325),(190,350),(335,350),(335,335),(515,335),(515,315),(655,315),(655,255),(515,255),(515,235),(335,235),(335,220),(190,220),(190,245)]
+    path=c.beginPath(); path.moveTo(*points[0])
+    for x,y in points[1:]: path.lineTo(x,y)
+    path.close(); c.drawPath(path)
+    for x,y1,y2 in [(190,220,350),(335,235,335),(515,255,315)]: c.line(x,y1,x,y2)
+    c.setDash(6,3); c.setLineWidth(.6); c.line(80,285,700,285); c.setDash()
+    c.line(125,200,655,200); c.line(125,190,125,235); c.line(655,190,655,245)
+    c.setFont('Helvetica',12); c.drawCentredString(390,180,'C11: Overall length: 120 +/- 0.20 mm')
+    c.line(190,380,335,380); c.line(190,360,190,390); c.line(335,360,335,390)
+    c.drawString(180,415,f'C27: Bearing seat: Ø20 +/- {tol} mm')
+    c.line(260,405,260,352)
+    c.drawString(495,370,'C32: End journal: Ø16 +/- 0.05 mm'); c.line(560,355,575,317)
+    c.setFont('Helvetica',10)
+    c.drawString(55,120,'Material: 42CrMo4')
+    c.drawString(55,103,'Units: mm')
+    c.drawString(55,86,'Standard: ISO 2768-m (reference fixture only)')
+    c.line(25,150,817,150); c.line(450,25,450,150)
+    c.drawString(470,125,'Drawing: DWG-GS-204')
+    c.drawString(470,107,'Part number: GS-204')
+    c.drawString(470,89,'Part name: Gear Shaft')
+    c.drawString(470,71,f'Revision: {rev}')
+    c.drawString(470,53,'Scale: 2:1')
+    c.setFont('Helvetica',8); c.drawString(45,40,'Fictional dimensions for software testing. Geometry is schematic. All rights waived (CC0).')
+    c.save()
+Path('samples/characteristics-A.csv').write_text('characteristic_id,label,type,nominal,upper_tolerance,lower_tolerance,unit,critical\nC27,Bearing seat,diameter,20,0.10,-0.10,mm,true\nC11,Overall length,linear,120,0.20,-0.20,mm,false\n')
+Path('samples/characteristics-B.csv').write_text('characteristic_id,label,type,nominal,upper_tolerance,lower_tolerance,unit,critical\nC27,Bearing seat,diameter,20,0.02,-0.02,mm,true\nC11,Overall length,linear,120,0.20,-0.20,mm,false\n')
+Path('samples/inventory.csv').write_text('part,revision,quantity,status,location,batch,production_order\nGS-204,C,147,WIP,Machining cell 04,B-260901,PO-2048\nGS-204,C,82,FINISHED,Finished goods A3,B-260829,PO-2048\n')
+print('Created fictional PDF and CSV fixtures.')
