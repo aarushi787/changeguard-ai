@@ -8,9 +8,10 @@ import Universal from './universal';
 
 type D = Record<string, any>;
 const client=new QueryClient({defaultOptions:{queries:{retry:false,refetchOnWindowFocus:false}}});
+class ApiError extends Error { constructor(message:string,public status:number){super(message)} }
 async function api(path:string,method='GET',body?:any){
   const response=await fetch('/api/v1'+path,{method,credentials:'same-origin',headers:{'X-ChangeGuard':'1',...(body instanceof FormData?{}:{'Content-Type':'application/json'})},body:body?body instanceof FormData?body:JSON.stringify(body):undefined});
-  if(!response.ok){let error;try{error=await response.json()}catch{error={detail:await response.text().catch(()=>response.statusText)}};throw new Error(typeof error.detail==='string'?error.detail:JSON.stringify(error.detail||error));}
+  if(!response.ok){const error=await response.json().catch(()=>({detail:response.statusText}));throw new ApiError(typeof error.detail==='string'?error.detail:JSON.stringify(error.detail||error),response.status);}
   return response.json();
 }
 function useData(key:string,path:string,enabled=true){return useQuery<D[]>({queryKey:[key,path],queryFn:async()=>{if(key!=='audit')return api(path);const result:D[]=[];for(let offset=0;;offset+=1000){const batch=await api(path+(path.includes('?')?'&':'?')+'offset='+offset+'&limit=1000');result.push(...batch);if(batch.length<1000)return [...new Map(result.map(r=>[r.id,r])).values()]}},enabled});}
@@ -42,6 +43,7 @@ function App(){
  function openChange(id:string,t='Overview'){setSelected(id);setTab(t);setPage('Engineering changes')}
  const nav=[['Overview',IconLayoutDashboard],['Engineering changes',IconGitCompare],['Projects & drawings',IconFolders],['Knowledge library',IconBook2],['Action center',IconChecklist],['Approvals',IconCircleCheck],['Audit trail',IconHistory]] as const;
  if(me.isPending)return <div className="loading-screen"><IconShieldCheck size={42}/><h2>ChangeGuard AI</h2><p>Loading your controlled change workspace…</p></div>;
+ if(me.isError&&(!(me.error instanceof ApiError)||me.error.status!==401))return <div className="loading-screen" role="alert"><IconAlertTriangle size={42}/><h2>Workspace service unavailable</h2><p>{me.error instanceof ApiError&&me.error.status===404?'This website is not connected to the ChangeGuard backend. Ask the site administrator to finish the deployment.':'We could not reach your workspace service. Please try again shortly.'}</p><button className="button primary" onClick={()=>me.refetch()}>Retry connection</button><small>Sign-in and company registration will be available once the service is restored.</small></div>;
  if(!me.data)return <LoginScreen onLogin={()=>window.location.reload()} />;
  if(!engineeringMode)return <Universal me={me.data}/>;
  const items=(sets.data||[]).filter(c=>`${c.title} ${c.part} ${c.number}`.toLowerCase().includes(search.toLowerCase()));

@@ -53,6 +53,14 @@ The image copies `rules/` and installs local Tesseract. Windows/local environmen
 Cloud, private-cloud and on-premise use the same application. No runtime outbound model calls or remote fonts are required. Secrets belong in deployment secret storage, not source control. The image and PostgreSQL/TLS deployment must still be exercised in staging.
 # Revision 3 deployment notes
 
+## Vercel frontend routing
+
+Deploying the Vite `dist` directory publishes only the frontend. Supabase provides PostgreSQL; it does not host this FastAPI application. A frontend-only deployment returns 404 for `/api/v1/auth/me`, `/api/v1/auth/login` and `/api/v1/auth/register`.
+
+Run the provided Docker image as a persistent backend with its database secret, a private document volume, migrations and a worker. Route all `/api/:path*` requests from the frontend origin to that backend, preserving the complete `/api/` path. Configure APP_ORIGIN to the exact public frontend origin (for this deployment, `https://changeguard-ai.vercel.app`). Preserve Set-Cookie response headers. Do not direct API requests to the Supabase project URL, and never put the database secret in a VITE variable. A publicly hosted frontend cannot reach the developer machine's loopback address.
+
+Verify `/api/v1/health` returns JSON with status `ok` through the public frontend domain, then `/api/v1/auth/me` returns 401 when signed out. A 404 or HTML response indicates missing API routing. Only after those checks should login, registration policy, file downloads and queued processing be verified. The frontend now distinguishes an unavailable API from a normal signed-out session.
+
 Apply Alembic migration 0003 before starting the updated API/worker. Docker now includes `domain_packs/`. Both API and worker must deploy the same code, pack files, database and private source volume. The existing Compose PostgreSQL/TLS topology remains the production deployment starting point.
 
 For a **separate demonstration deployment**, run `python -m scripts.seed_multidomain` after migrations. Never run demo seeding automatically in a production startup command. Production seeding remains blocked unless `ALLOW_DEMO_SEED=1` is explicitly set. The seed creates a new PRAGATI tenant and preserves Northstar records.
