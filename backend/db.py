@@ -10,9 +10,10 @@ def now():
 def uid():
     return uuid.uuid4().hex
 
-DATABASE_URL = os.getenv('DATABASE_URL', 'sqlite:///./data/changeguard.db')
+from backend.database_config import database_settings, configured_engine
+DATABASE_URL, DATABASE_CONNECT_ARGS, SUPABASE = database_settings()
 os.makedirs('data', exist_ok=True)
-engine = create_engine(DATABASE_URL, connect_args={'check_same_thread': False} if DATABASE_URL.startswith('sqlite') else {}, pool_pre_ping=True)
+engine = configured_engine(DATABASE_URL, DATABASE_CONNECT_ARGS, SUPABASE, pool_pre_ping=True)
 Session = sessionmaker(engine, expire_on_commit=False)
 
 class Base(DeclarativeBase):

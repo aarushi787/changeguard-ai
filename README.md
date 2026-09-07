@@ -1,5 +1,7 @@
 # ChangeGuard AI
 
+Supabase PostgreSQL connection instructions: [SUPABASE.md](SUPABASE.md).
+
 ## Revision 3 — Industrial AI · Change & Impact Intelligence
 
 **Know what a change will affect before you approve it.** Built for MCCIA AI Applied Studio.
