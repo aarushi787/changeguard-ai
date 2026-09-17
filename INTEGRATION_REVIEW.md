@@ -1,4 +1,4 @@
-# ChangeGuard AI — shared workspace integration review
+# UdyamSetu — shared workspace integration review
 
 Date: 7 September 2026. Scope: integrate the established drawing workflow into the three-pack Change & Impact Intelligence MVP for MCCIA AI Applied Studio.
 

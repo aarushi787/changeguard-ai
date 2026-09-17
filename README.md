@@ -1,4 +1,6 @@
-# ChangeGuard AI
+# UdyamSetu
+
+**Change & Impact Intelligence for MSMEs.**
 
 Supabase PostgreSQL connection instructions: [SUPABASE.md](SUPABASE.md).
 
@@ -102,3 +104,7 @@ The original sample PDF and CSV files under `samples/` are CC0 fictional fixture
 ## Unified workspace
 
 Engineering drawings, supplier and quality changes now share one sidebar, change register, action queue and approval navigation. Start drawing work from New change → Engineering → Drawing revisions. See [integration audit, implementation and validation](INTEGRATION_REVIEW.md).
+
+## Application branding
+
+The application is named **UdyamSetu**. Existing deployment URLs, GitHub repository names, demo login credentials, the `changeguard` database schema, `cg_session` cookie and `X-ChangeGuard` request header are retained for compatibility. The rename does not require a database migration or change stored engineering evidence. Previously generated reports retain their original bytes and hashes; newly generated PDF reports and report/template download filenames use UdyamSetu.

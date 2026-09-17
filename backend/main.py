@@ -148,7 +148,7 @@ async def lifespan(app):
     STOP.set()
     if thread: thread.join(timeout=5)
 
-app=FastAPI(title='ChangeGuard AI',version='0.1.0',lifespan=lifespan)
+app=FastAPI(title='UdyamSetu',version='0.1.0',lifespan=lifespan)
 app.add_middleware(BodyLimit)
 
 @app.exception_handler(StorageCapacityError)
@@ -711,7 +711,7 @@ def dependency_template(kind:Literal['process','control-plan','pfmea'],u:User=De
               'control-plan':['C27','Bearing seat','characteristic','cp021','CP-021 characteristic 14','document','CHARACTERISTIC_REFERENCED_IN_CONTROL_PLAN','Quality engineer'],
               'pfmea':['C27','Bearing seat','characteristic','pf021','PF-021 failure mode 8','document','CHARACTERISTIC_REFERENCED_IN_PFMEA','Quality engineer']}
     data=workbook_bytes({'Mappings':[headers,examples[kind]],'Instructions':[['DEMONSTRATION TEMPLATE'],['Replace the example with your controlled mapping. One row per relationship.'],['Existing IDs must use exactly the same label and type. Import never confirms graph completeness.'],['Capability is UNKNOWN until independently verified.']]})
-    return Response(data,media_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',headers={'Content-Disposition':f'attachment; filename="ChangeGuard-{kind}-template.xlsx"'})
+    return Response(data,media_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',headers={'Content-Disposition':f'attachment; filename="UdyamSetu-{kind}-template.xlsx"'})
 
 @app.post('/api/v1/projects/{id}/dependency-import')
 async def dependency_import(id:str,commit:bool=False,file:UploadFile=File(...),u:User=Depends(user),s:DBSession=Depends(db)):
@@ -759,7 +759,7 @@ def report_download(id:str,u:User=Depends(user),s:DBSession=Depends(db)):
     j=get(s,u,id,'job')
     if j.data.get('type')!='REPORT' or j.data['status']!='SUCCEEDED':raise HTTPException(409,'Report is not ready.')
     content=source_bytes(j);fmt=j.data['format']
-    return Response(content,media_type='application/pdf' if fmt=='pdf' else 'application/json' if fmt=='json' else 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',headers={'Content-Disposition':f'attachment; filename="ChangeGuard-{id[:8]}.{fmt}"'})
+    return Response(content,media_type='application/pdf' if fmt=='pdf' else 'application/json' if fmt=='json' else 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',headers={'Content-Disposition':f'attachment; filename="UdyamSetu-{id[:8]}.{fmt}"'})
 
 class Reconciliation(Reason):
     source_ids:list[str]=Field(min_length=1,max_length=20)

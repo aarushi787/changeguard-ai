@@ -1,4 +1,4 @@
-name: Verify ChangeGuard
+name: Verify UdyamSetu
 on: [push, pull_request]
 jobs:
   verify:

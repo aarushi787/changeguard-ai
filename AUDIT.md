@@ -1,4 +1,4 @@
-# Expert audit — ChangeGuard AI baseline
+# Expert audit — UdyamSetu baseline
 
 Audit scope: every source module, API, models, migration, rule pack, frontend component/style, tests, deployment/configuration, fixtures, report generator and operating document. Existing browser inspected. No Git repository/history is present. Baseline is v0.1.0; modifications began only after this inspection.
 

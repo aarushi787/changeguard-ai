@@ -1,4 +1,4 @@
-# ChangeGuard AI — expert audit and implementation review
+# UdyamSetu — expert audit and implementation review
 
 Prepared for MCCIA AI Applied Studio, 6 September 2026. The platform is a materially improved working evaluation MVP. It is not certified manufacturing software and is not approved for unattended customer production use.
 
