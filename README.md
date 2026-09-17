@@ -1,6 +1,6 @@
-# UdyamSetu
+# Review Desk
 
-**Change & Impact Intelligence for MSMEs.**
+**Change Review & Impact Analysis for MSMEs.**
 
 Supabase PostgreSQL connection instructions: [SUPABASE.md](SUPABASE.md).
 
@@ -107,4 +107,4 @@ Engineering drawings, supplier and quality changes now share one sidebar, change
 
 ## Application branding
 
-The application is named **UdyamSetu**. Existing deployment URLs, GitHub repository names, demo login credentials, the `changeguard` database schema, `cg_session` cookie and `X-ChangeGuard` request header are retained for compatibility. The rename does not require a database migration or change stored engineering evidence. Previously generated reports retain their original bytes and hashes; newly generated PDF reports and report/template download filenames use UdyamSetu.
+The application is named **Review Desk**. Existing deployment URLs, GitHub repository names, demo login credentials, the `changeguard` database schema, `cg_session` cookie and `X-ChangeGuard` request header are retained for compatibility. The rename does not require a database migration or change stored engineering evidence. Previously generated reports retain their original bytes and hashes; newly generated PDF reports display Review Desk and report/template download filenames use the `ReviewDesk-` prefix.

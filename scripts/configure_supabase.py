@@ -21,8 +21,8 @@ def main():
         root = tk.Tk()
         root.withdraw()
         root.attributes('-topmost', True)
-        password = askstring('Connect UdyamSetu to Supabase',
-            'Enter the database password you set for UdyamSetu.\nIt will be saved locally, excluded from Git, and never printed.',
+        password = askstring('Connect Review Desk to Supabase',
+            'Enter the database password you set for Review Desk.\nIt will be saved locally, excluded from Git, and never printed.',
             show='*', parent=root)
         root.destroy()
         if not password:

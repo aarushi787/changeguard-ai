@@ -1,4 +1,4 @@
-# UdyamSetu — multi-domain implementation review
+# Review Desk — multi-domain implementation review
 
 Revision 3, September 2026. Built for **MCCIA AI Applied Studio**.
 

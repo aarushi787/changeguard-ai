@@ -15,11 +15,11 @@ with Session() as s:
     source=s.get(Record,cs.data['old_revision_id']); target=s.get(Record,cs.data['new_revision_id'])
     u=s.scalar(select(User).where(User.tenant==cs.tenant))
     payload={**out(cs),'source_sha256':source.data['sha256'],'target_sha256':target.data['sha256'],'unresolved':blockers(s,u,cs)}
-    report=make_report(payload,events,'pdf','impact',drawing_previews([source.data,target.data],STORAGE));(root/'UdyamSetu-Demo-Impact.pdf').write_bytes(report)
-    (root/'UdyamSetu-Demo-Impact.xlsx').write_bytes(make_report(payload,events,'xlsx','impact'))
+    report=make_report(payload,events,'pdf','impact',drawing_previews([source.data,target.data],STORAGE));(root/'ReviewDesk-Demo-Impact.pdf').write_bytes(report)
+    (root/'ReviewDesk-Demo-Impact.xlsx').write_bytes(make_report(payload,events,'xlsx','impact'))
     revision=s.get(Record,cs.data['new_revision_id'])
     balloon=balloon_export(revision.data,STORAGE,'pdf');(root/'GS-204-Rev-D-Ballooned.pdf').write_bytes(balloon)
-for name in ['UdyamSetu-Demo-Impact','GS-204-Rev-D-Ballooned']:
+for name in ['ReviewDesk-Demo-Impact','GS-204-Rev-D-Ballooned']:
     with fitz.open(root/f'{name}.pdf') as pdf:
         print(f'{name}: {len(pdf)} pages')
         for i,page in enumerate(pdf):

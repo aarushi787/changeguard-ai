@@ -478,7 +478,7 @@ def report(id:str,format:Literal['json','xlsx','pdf']='json',u:User=Depends(user
     events=[{'actor':e.actor,'operation':e.operation,'details':e.details,'at':e.created.replace(tzinfo=timezone.utc).isoformat()} for e in s.scalars(select(Audit).where(Audit.tenant==u.tenant,Audit.entity==id).order_by(Audit.created,Audit.id))]
     data=render(view(r),events,format)
     event(s,u,r,'REPORT_EXPORTED',{'format':format,'sha256':hashlib.sha256(data).hexdigest()});s.commit()
-    return Response(data,media_type={'json':'application/json','pdf':'application/pdf','xlsx':'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'}[format],headers={'Content-Disposition':f'attachment; filename="UdyamSetu-{id[:8]}.{format}"'})
+    return Response(data,media_type={'json':'application/json','pdf':'application/pdf','xlsx':'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'}[format],headers={'Content-Disposition':f'attachment; filename="ReviewDesk-{id[:8]}.{format}"'})
 
 class ReportRequest(Input):
     format:Literal['json','xlsx','pdf']='pdf'
@@ -511,4 +511,4 @@ def report_download(id:str,u:User=Depends(user),s:DBSession=Depends(db)):
     content=(STORAGE/j.data['storage_key']).read_bytes()
     if hashlib.sha256(content).hexdigest()!=j.data['sha256']:raise HTTPException(409,'Report integrity check failed.')
     fmt=j.data['format']
-    return Response(content,media_type={'pdf':'application/pdf','xlsx':'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet','json':'application/json'}[fmt],headers={'Content-Disposition':f'attachment; filename="UdyamSetu-{id[:8]}.{fmt}"'})
+    return Response(content,media_type={'pdf':'application/pdf','xlsx':'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet','json':'application/json'}[fmt],headers={'Content-Disposition':f'attachment; filename="ReviewDesk-{id[:8]}.{fmt}"'})
