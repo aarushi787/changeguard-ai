@@ -17,6 +17,8 @@ services:
         value: production
       - key: APP_ORIGIN
         value: https://changeguard-ai.vercel.app
+      - key: APP_ADDITIONAL_ORIGINS
+        value: https://mccia-reviewdesk.vercel.app,https://change-guard-ai.vercel.app
       - key: ALLOW_REGISTRATION
         value: "0"
       - key: RUN_WORKER

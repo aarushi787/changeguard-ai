@@ -6,7 +6,7 @@
 - Scrypt password hashes with per-user random salt and constant-time hash comparison. New accounts require at least 12 characters.
 - Server-side tenant checks on reads, writes, pages, references, jobs, tokens and reports. Resource enumeration across tenants returns 404.
 - Strict Pydantic mutation models reject unknown fields and non-finite numbers. Roles and tenant IDs cannot be client-edited.
-- Mutating requests require `X-ChangeGuard: 1`; browser Origin must match configured deployment origin. No permissive CORS configuration.
+- Mutating requests require `X-ChangeGuard: 1`; browser Origin must exactly match APP_ORIGIN or an explicitly configured APP_ADDITIONAL_ORIGINS entry. Production configuration accepts HTTPS origins only and rejects wildcard, credential-bearing and path-bearing URLs. No permissive CORS configuration.
 - Ten unsuccessful/successful login attempts per source address per minute in the single API process. Deploy shared gateway rate limits for multiple replicas. This in-memory guard is not a complete credential-abuse solution.
 - Upload limits: 20 MB controlled file; 100 PDF pages; 25 megapixel image; Office archives maximum 2,000 entries/60 MB decompressed; no macro project; 10,000 canonical spreadsheet rows. Inventory maximum 2 MB/10,000 rows.
 - Generated storage filenames, no public static document directory, attachment downloads, authenticated page rendering and `nosniff` headers.

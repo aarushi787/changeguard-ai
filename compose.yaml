@@ -27,6 +27,7 @@ services:
       DATABASE_URL: postgresql+psycopg://changeguard:${POSTGRES_PASSWORD}@db:5432/changeguard
       ENVIRONMENT: production
       APP_ORIGIN: ${APP_ORIGIN:-https://localhost}
+      APP_ADDITIONAL_ORIGINS: ${APP_ADDITIONAL_ORIGINS:-}
       ALLOW_REGISTRATION: ${ALLOW_REGISTRATION:-0}
       RUN_WORKER: "0"
     volumes:

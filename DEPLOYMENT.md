@@ -82,3 +82,12 @@ Cloud/private cloud/on-premise all use the same AI-off core. No external provide
 ## Shared workspace integration — September 2026
 
 The production topology is Vercel frontend → the checked-in `/api/:path*` rewrite → `https://changeguard-api.onrender.com` → private Supabase PostgreSQL schema. Deploy backend and frontend from the same commit. The integration uses the existing aggregate schema and requires migration 0004 for database document storage. No public secret or new paid service is needed. After deployment verify `/api/v1/workspace/changes`, sign-in, and a drawing change; `#engineering` now resolves inside the shared shell. Local UI validation can use a separate SQLite database and port 8012; never point a filesystem worker at the cloud queue.
+
+
+### Additional frontend domains
+
+The MCCIA frontend is available at `https://mccia-reviewdesk.vercel.app`. Its `/api/` rewrite uses the existing Render backend and Supabase database. An alias in Vercel does not automatically update backend trust.
+
+Keep `APP_ORIGIN=https://changeguard-ai.vercel.app` and set `APP_ADDITIONAL_ORIGINS=https://mccia-reviewdesk.vercel.app,https://change-guard-ai.vercel.app` on the backend to retain the existing deployed addresses. This is a comma-separated list of exact origins; do not include paths or wildcards. Redeploy the backend after changing it. Only add origins controlled by your organization; remove obsolete aliases when retired. No database credentials belong in the frontend.
+
+A signed-out `GET /api/v1/auth/me` returns 401 by design. `POST /api/v1/auth/login` returning 403 with `Origin not allowed` indicates a missing trusted origin, not a bad password. After a domain change, verify login, the session cookie, workspace reads and logout from the new origin. Existing cookies do not transfer between hostnames, so users must sign in again at a new address.

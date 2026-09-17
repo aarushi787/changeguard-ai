@@ -27,6 +27,7 @@ from backend.boundary import BodyLimit
 from backend.graph import persist as persist_graph
 from backend.db import Base, engine, Session, Organization, User, AuthSession, Record, Audit, now, uid
 from backend.security import hash_password, verify_password, token_hash
+from backend.origins import configured_origins
 from backend.intelligence import DeterministicProvider, AdjacencyGraph, compare, assess, load_pack, validate_file
 
 logging.basicConfig(level=logging.INFO, format='%(message)s')
@@ -34,6 +35,7 @@ log = logging.getLogger('changeguard')
 from backend.storage import document_storage, StorageCapacityError
 STORAGE = document_storage()
 PRODUCTION = os.getenv('ENVIRONMENT') == 'production'
+ALLOWED_ORIGINS = configured_origins(PRODUCTION)
 STOP = threading.Event()
 
 def db():
@@ -166,9 +168,7 @@ async def boundary(request, call_next):
     if request.method not in {'GET','HEAD','OPTIONS'}:
         if request.headers.get('x-changeguard')!='1': return Response('Missing request safety header',403)
         origin=request.headers.get('origin')
-        allowed=os.getenv('APP_ORIGIN','http://127.0.0.1:5173')
-        allowed_origins={allowed} if PRODUCTION else {allowed,'http://127.0.0.1:8010','http://localhost:8010','http://127.0.0.1:5173','http://localhost:5173'}
-        if origin and origin not in allowed_origins:
+        if origin and origin not in ALLOWED_ORIGINS:
             return Response('Origin not allowed',403)
         try: length=int(request.headers.get('content-length','0'))
         except ValueError: return Response('Invalid content length',400)
