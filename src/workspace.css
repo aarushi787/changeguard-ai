@@ -1,26 +1,27 @@
-/* One shell around both structured and drawing evidence. */
+/* One shell around both structured and drawing evidence with MCCIA branding. */
 .u-main{padding:0!important;margin:0;min-width:0}
 .u-sidebar nav{margin-top:0;gap:4px;overflow-y:auto;flex-shrink:1}
 .u-sidebar nav button{font-size:12px;justify-content:flex-start;min-height:38px;flex-shrink:0}
 .u-sidebar{height:100dvh}
 .u-sidebar-bottom{flex-shrink:0}
-.workspace-skip{position:fixed;top:-80px;left:240px;z-index:1100;padding:12px;background:white;color:#174d3e}
+.workspace-skip{position:fixed;top:-80px;left:240px;z-index:1100;padding:12px;background:#FFFFFF;color:var(--brand-blue,#1870B8);font-weight:600;box-shadow:0 4px 12px rgba(0,0,0,.15);border-radius:4px}
 .workspace-skip:focus{top:12px}
-.drawing-module{min-width:0;color:var(--u-ink)}
-.drawing-module .page-heading h1{font-size:28px;color:var(--u-ink)}
-.drawing-module .page-heading p,.drawing-module .subtle{color:var(--u-muted)}
-.drawing-module .panel{background:#fff;border-color:#dce4dd}
-.u-shell .drawing-module .button.primary{background:#174d3e;color:white;border-color:#174d3e}
+.drawing-module{min-width:0;color:var(--u-ink,#1E293B)}
+.drawing-module .page-heading h1{font-size:28px;color:#0B2238}
+.drawing-module .page-heading p,.drawing-module .subtle{color:var(--u-muted,#64748B)}
+.drawing-module .panel{background:#FFFFFF;border-color:var(--u-line,#E2E8F0)}
+.u-shell .drawing-module .button.primary{background:var(--u-blue,#1870B8);color:#FFFFFF;border-color:var(--u-blue,#1870B8)}
+.u-shell .drawing-module .button.primary:hover{background:var(--u-blue-hover,#125793);border-color:var(--u-blue-hover,#125793)}
 .drawing-module .tabs{gap:4px}
-.u-shell .drawing-module .tabs button{border:0;border-radius:0;padding:12px;color:#64776c;white-space:nowrap;background:transparent}
-.u-shell .drawing-module .tabs button.active{color:#174d3e;border-bottom:2px solid #174d3e}
+.u-shell .drawing-module .tabs button{border:0;border-radius:0;padding:12px;color:var(--u-muted,#64748B);white-space:nowrap;background:transparent;font-weight:500}
+.u-shell .drawing-module .tabs button.active{color:var(--u-blue,#1870B8);border-bottom:2px solid var(--u-blue,#1870B8);font-weight:700}
 .drawing-module .project-grid{grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));margin-bottom:20px}
 .drawing-module .project-buttons{flex-wrap:wrap}
 .drawing-module .modal-backdrop{z-index:1000}
 .drawing-module .toast{z-index:1100}
-.drawing-entry{border-top:1px solid #dce4dd;margin-top:20px;padding-top:18px}
+.drawing-entry{border-top:1px solid var(--u-line,#E2E8F0);margin-top:20px;padding-top:18px}
 .drawing-module .workbench{margin-bottom:20px}
-.u-badge.released{background:#e3f0e7;color:#246047}
-.u-badge.quality_review,.u-badge.engineering_review{background:#e8eef7;color:#48668b}
+.u-badge.released{background:var(--u-green-light,#EDF8F0);color:var(--u-green-hover,#1B873A);border-color:var(--u-green-border,#B4E4BE)}
+.u-badge.quality_review,.u-badge.engineering_review{background:var(--u-blue-light,#EFF6FF);color:var(--u-blue,#1870B8);border-color:var(--u-blue-border,#BFDCF6)}
 .u-shell .drawing-module .icon-button{padding:6px}
 @media(max-width:700px){.u-sidebar{height:auto}.u-sidebar nav{flex-direction:row}.u-sidebar nav button{justify-content:flex-start}.workspace-skip{left:12px}.drawing-module .page-heading h1{font-size:24px}}

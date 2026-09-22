@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 220" width="100%" height="100%">
+  <!-- MCCIA Official Corporate Vector Logo -->
+  <g id="mccia-logo" transform="translate(10, 30)">
+    <!-- Blue section: mcci (#1870B8) -->
+    <!-- 'm' letter -->
+    <path fill="#1870B8" d="M10 140 L10 40 L38 40 L38 70 Q48 40 68 40 Q86 40 94 65 Q106 40 128 40 L155 40 L155 140 L126 140 L126 78 Q126 64 116 64 Q104 64 100 78 L100 140 L72 140 L72 78 Q72 64 62 64 Q50 64 46 78 L46 140 Z"/>
+    
+    <!-- first 'c' letter -->
+    <path fill="#1870B8" d="M228 65 L202 75 Q195 62 182 62 Q166 62 166 90 Q166 118 182 118 Q195 118 202 105 L228 115 Q215 140 182 140 Q136 140 136 90 Q136 40 182 40 Q215 40 228 65 Z"/>
+    
+    <!-- second 'c' letter -->
+    <path fill="#1870B8" d="M305 65 L279 75 Q272 62 259 62 Q243 62 243 90 Q243 118 259 118 Q272 118 279 105 L305 115 Q292 140 259 140 Q213 140 213 90 Q213 40 259 40 Q292 40 305 65 Z"/>
+    
+    <!-- 'i' letter -->
+    <path fill="#1870B8" d="M320 40 L348 40 L348 140 L320 140 Z"/>
+    
+    <!-- Green section: a (#22A848) -->
+    <!-- 'a' letter -->
+    <path fill="#22A848" d="M410 40 L438 40 L438 140 L410 140 L410 124 Q398 140 376 140 Q348 140 348 105 Q348 70 380 66 L410 63 L410 60 Q410 48 395 48 Q380 48 372 58 L354 44 Q372 25 400 25 Q426 25 432 40 M410 82 L388 85 Q376 87 376 102 Q376 116 390 116 Q404 116 410 105 Z"/>
+    
+    <!-- Registered trademark ® -->
+    <g transform="translate(445, 25)" fill="#1870B8">
+      <circle cx="12" cy="12" r="11" fill="none" stroke="#1870B8" stroke-width="2.2"/>
+      <text x="12" y="16.5" font-family="'Segoe UI', Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#1870B8">R</text>
+    </g>
+  </g>
+</svg>

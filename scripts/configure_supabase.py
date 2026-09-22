@@ -4,7 +4,7 @@ import argparse
 from pathlib import Path
 from sqlalchemy import create_engine, text
 from sqlalchemy.engine import URL
-from backend.database_config import database_settings
+from backend.database_config import database_settings, is_supabase
 
 
 def main():
@@ -33,8 +33,8 @@ def main():
     else:
         raw = getpass('Supabase direct/session PostgreSQL URL (hidden): ').strip()
     try:
-        url, args, is_supabase = database_settings({'DATABASE_URL': raw})
-        if not is_supabase:
+        url, args, private_schema = database_settings({'DATABASE_URL': raw})
+        if not is_supabase(url):
             raise ValueError('Use a Supabase PostgreSQL connection URL.')
         with create_engine(url, connect_args=args, hide_parameters=True).connect() as connection:
             connection.execute(text('SELECT 1'))

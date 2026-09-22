@@ -10,10 +10,11 @@ def now():
 def uid():
     return uuid.uuid4().hex
 
-from backend.database_config import database_settings, configured_engine
-DATABASE_URL, DATABASE_CONNECT_ARGS, SUPABASE = database_settings()
+from backend.database_config import database_settings, configured_engine, is_supabase
+DATABASE_URL, DATABASE_CONNECT_ARGS, PRIVATE_SCHEMA = database_settings()
+SUPABASE = is_supabase(DATABASE_URL)
 os.makedirs('data', exist_ok=True)
-engine = configured_engine(DATABASE_URL, DATABASE_CONNECT_ARGS, SUPABASE, pool_pre_ping=True)
+engine = configured_engine(DATABASE_URL, DATABASE_CONNECT_ARGS, PRIVATE_SCHEMA, pool_pre_ping=True)
 Session = sessionmaker(engine, expire_on_commit=False)
 
 class Base(DeclarativeBase):
